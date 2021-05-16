@@ -16,20 +16,33 @@ public class BotaoConsultaEspecialidade extends AbstractAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        String[] nomeMedicos = new String[1024];
-        String[] especialidadeMedicos = new String[1024];
+        String[] nomeMedicos = new String[vetor.length];
+        String[] especialidadeMedicos = new String[vetor.length];
+        String[] horarioMedicos = new String[vetor.length];
+        String[] fimHorario = new String[vetor.length];
+
         for(j=0; j < vetor.length; j++){
             if ((vetor[j]!=null)&&(vetor[j].getEspecialidade().equals(especialidade.getText()))){
                 nomeMedicos[j] = vetor[j].getNome();
                 especialidadeMedicos[j] = vetor[j].getEspecialidade();
+                horarioMedicos[j] = vetor[j].getHorario() + " - ";
+                fimHorario[j] = vetor[j].getFimHorario();
             }
         }
         JList<String> listaNomes = new JList<>(nomeMedicos);
         JList<String> listaEspecialidades = new JList<>(especialidadeMedicos);
+        JList<String> listaHorario = new JList<>(horarioMedicos);
+        JList<String> listaFimHorario = new JList<>(fimHorario);
 
         Janela medicosEspecializados = new Janela("Medicos Disponiveis", false, false);
-        medicosEspecializados.add(listaNomes, BorderLayout.WEST);
-        medicosEspecializados.add(listaEspecialidades, BorderLayout.EAST);
+
+        /*
+            Falta adicionar essas desgraca de lista no layout
+            Pode criar uns JPanel se quiser
+
+
+        */
+
     }
 
 }

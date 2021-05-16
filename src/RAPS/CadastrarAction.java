@@ -17,6 +17,7 @@ public class CadastrarAction extends AbstractAction {
         Janela janelaDeCadastro = new Janela("Novo Cadastro", false, false);
         JPanel nomeDoMedico = new JPanel();
         JPanel especialidadeDoMedico = new JPanel();
+        JPanel horarioDoMedico = new JPanel();
 
         JLabel nome = new JLabel("Digite o nome");
         JTextField getNome = new JTextField(20);
@@ -28,11 +29,23 @@ public class CadastrarAction extends AbstractAction {
         especialidadeDoMedico.add(especialidade);
         especialidadeDoMedico.add(getEspecialidade);
 
-        JButton botaoCadastrar = new JButton(new BotaoCadastro(getNome, getEspecialidade, vetor));
+        JLabel horario = new JLabel("Escolha o seu horario");
+        JTextField getHorario = new JTextField(8);
+        JLabel fimHorario = new JLabel("até");
+        JTextField getFimHorario = new JTextField(8);
+
+        horarioDoMedico.add(horario);
+        horarioDoMedico.add(getHorario);
+        horarioDoMedico.add(fimHorario);
+        horarioDoMedico.add(getFimHorario);
+
+        JButton botaoCadastrar = new JButton(new BotaoCadastro(getNome, getEspecialidade, vetor, getHorario, getFimHorario));
         botaoCadastrar.setText("Cadastrar");
 
-        janelaDeCadastro.add(especialidadeDoMedico);
-        janelaDeCadastro.add(nomeDoMedico, BorderLayout.BEFORE_FIRST_LINE);
+
+        janelaDeCadastro.add(especialidadeDoMedico, BorderLayout.CENTER);
+        janelaDeCadastro.add(nomeDoMedico, BorderLayout.WEST);
+        janelaDeCadastro.add(horarioDoMedico, BorderLayout.EAST);
         janelaDeCadastro.add(botaoCadastrar, BorderLayout.SOUTH);
     }
 }
