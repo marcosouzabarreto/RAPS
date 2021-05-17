@@ -1,5 +1,6 @@
 package RAPS;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,24 +10,33 @@ public class BotaoConsultaEspecialidade extends AbstractAction {
     Medicos[] vetor;
 
 
-    JTextField especialidade;
+    JTextField especialidadeDesejada;
+
     public BotaoConsultaEspecialidade (Medicos[] vetor, JTextField especialidade){
         this.vetor = vetor;
-        this.especialidade = especialidade;
+        this.especialidadeDesejada = especialidade;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
         String[] nomeMedicos = new String[vetor.length];
         String[] especialidadeMedicos = new String[vetor.length];
         String[] horarioMedicos = new String[vetor.length];
         String[] fimHorario = new String[vetor.length];
 
-        for(j=0; j < vetor.length; j++){
-            if ((vetor[j]!=null)&&(vetor[j].getEspecialidade().equals(especialidade.getText()))){
-                nomeMedicos[j] = vetor[j].getNome();
-                especialidadeMedicos[j] = vetor[j].getEspecialidade();
-                horarioMedicos[j] = vetor[j].getHorario() + " - ";
-                fimHorario[j] = vetor[j].getFimHorario();
+
+        nomeMedicos[0] = "Nome: ";
+        especialidadeMedicos[0] = "Especialidade: ";
+        horarioMedicos[0] = "Horario inicial: ";
+        fimHorario[0] = "Horario final: ";
+
+        for(j = 1; j < vetor.length; j++){
+            if ((vetor[j-1]!=null)&&(vetor[j-1].getEspecialidade().equals(especialidadeDesejada.getText()))){
+                nomeMedicos[j] = vetor[j-1].getNome();
+                especialidadeMedicos[j] = vetor[j-1].getEspecialidade();
+                horarioMedicos[j] = vetor[j-1].getHorario();
+                fimHorario[j] = vetor[j-1].getFimHorario();
             }
         }
         JList<String> listaNomes = new JList<>(nomeMedicos);
@@ -34,14 +44,15 @@ public class BotaoConsultaEspecialidade extends AbstractAction {
         JList<String> listaHorario = new JList<>(horarioMedicos);
         JList<String> listaFimHorario = new JList<>(fimHorario);
 
-        Janela medicosEspecializados = new Janela("Medicos Disponiveis", false, false);
-
-        /*
-            Falta adicionar essas desgraca de lista no layout
-            Pode criar uns JPanel se quiser
+        Janela frame = new Janela("Medicos Disponiveis", false, false);
+        frame.setLayout(new GridLayout());
 
 
-        */
+
+        frame.add(listaNomes);
+        frame.add(listaEspecialidades);
+        frame.add(listaHorario);
+        frame.add(listaFimHorario);
 
     }
 

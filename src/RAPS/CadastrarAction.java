@@ -1,5 +1,6 @@
 package RAPS;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,9 +8,11 @@ import java.awt.event.ActionEvent;
 public class CadastrarAction extends AbstractAction {
 
     Medicos[] vetor;
+    int i;
 
-    public CadastrarAction (Medicos[] vetor){
+    public CadastrarAction (Medicos[] vetor, int i){
         this.vetor = vetor;
+        this.i = i;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class CadastrarAction extends AbstractAction {
         horarioDoMedico.add(fimHorario);
         horarioDoMedico.add(getFimHorario);
 
-        JButton botaoCadastrar = new JButton(new BotaoCadastro(getNome, getEspecialidade, vetor, getHorario, getFimHorario));
+        JButton botaoCadastrar = new JButton(new BotaoCadastro(getNome, getEspecialidade, vetor, getHorario, getFimHorario, i));
         botaoCadastrar.setText("Cadastrar");
 
 

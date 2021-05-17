@@ -1,5 +1,6 @@
 package RAPS;
 
+import java.io.*;
 import javax.swing.*;
 
 public class Janela extends JFrame {
@@ -31,6 +32,8 @@ public class Janela extends JFrame {
     }
 
     public void createMenu(Medicos[] vetor){
+        int i = 0;
+
         JMenuBar menu = new JMenuBar();
         JMenu operacoes = new JMenu("Operações");
         JMenu opcoes = new JMenu("Opções");
@@ -38,18 +41,23 @@ public class Janela extends JFrame {
         menu.add(operacoes);
         menu.add(opcoes);
 
-        JMenuItem cadastro = new JMenuItem(new CadastrarAction(vetor));
+        JMenuItem cadastro = new JMenuItem(new CadastrarAction(vetor, i));
         cadastro.setText("Cadastrar");
 
         JMenuItem consulta = new JMenuItem(new ConsultaAction(vetor));
         consulta.setText("Consultar Medicos");
 
         JMenuItem consultaEspecialidade = new JMenuItem(new ConsultaEspecialidade(vetor));
-        consultaEspecialidade.setText("Consulta por especialidade");
+        consultaEspecialidade.setText("Consulta por Especialidade");
+
+
+
 
         JMenuItem sair = new JMenuItem(new SairAction());
         sair.setText("Sair");
         opcoes.add(sair);
+
+
 
         operacoes.add(cadastro);
         operacoes.add(consulta);
@@ -59,6 +67,7 @@ public class Janela extends JFrame {
     }
 
     public static void main(String[] args) {
+
 
         lookAndFeel();
         Janela home = new Janela("RAPS", true, true);

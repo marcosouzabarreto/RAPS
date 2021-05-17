@@ -1,11 +1,12 @@
 package RAPS;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class ConsultaAction extends AbstractAction {
-    int j = 0;
+    int j = 1;
     Medicos[] vetor;
 
     public ConsultaAction (Medicos[] vetor){
@@ -13,25 +14,28 @@ public class ConsultaAction extends AbstractAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        Janela listaMedicos = new Janela("Medicos Disponiveis", false, false);
+
+        Janela frame = new Janela("Consulta", false, false);
+
         String[] nomeMedicos = new String[vetor.length];
         String[] especialidadeMedicos = new String[vetor.length];
         String[] horarioMedicos = new String[vetor.length];
         String[] fimHorario = new String[vetor.length];
 
-        JPanel horario = new JPanel();
-        JPanel nome = new JPanel();
-        JPanel especialidade = new JPanel();
-        JPanel fimHora = new JPanel();
 
 
+        nomeMedicos[0] = "Nome: ";
+        especialidadeMedicos[0] = "Especialidade: ";
+        horarioMedicos[0] = "Horario inicial: ";
+        fimHorario[0] = "Horario final: ";
 
-        for(j=0; j < vetor.length; j++){
-            if (vetor[j]!=null){
-                nomeMedicos[j] = vetor[j].getNome();
-                especialidadeMedicos[j] = vetor[j].getEspecialidade();
-                horarioMedicos[j] = vetor[j].getHorario();
-                fimHorario[j] = vetor[j].getFimHorario();
+        for(j=1; j < vetor.length; j++){
+            if (vetor[j-1]!=null){
+
+                nomeMedicos[j] = vetor[j-1].getNome();
+                especialidadeMedicos[j] = vetor[j-1].getEspecialidade();
+                horarioMedicos[j] = vetor[j-1].getHorario();
+                fimHorario[j] = vetor[j-1].getFimHorario();
 
             }
         }
@@ -40,14 +44,11 @@ public class ConsultaAction extends AbstractAction {
         JList<String> listaHorario = new JList<>(horarioMedicos);
         JList<String> listaFimHorario = new JList<>(fimHorario);
 
-        horario.add(listaHorario);
-        fimHora.add(listaFimHorario);
-        nome.add(listaNomes);
-        especialidade.add(listaEspecialidades);
-/*
-        Falta adicionar essas desgraca daqui de cima no layout
+        frame.setLayout(new GridLayout());
+        frame.add(listaNomes);
+        frame.add(listaEspecialidades);
+        frame.add(listaHorario);
+        frame.add(listaFimHorario);
 
-
- */
     }
 }
